@@ -14,12 +14,19 @@ function App() {
     <div style={{ textAlign: 'center' }}>
       {templates.map((template) => {
         return (
-          <img
-            style={{ width: 200 }}
-            key={template.id}
-            src={template.blank}
-            alt={template.name}
-          />
+          <button
+            key="id"
+            onClick={() => {
+              setTemplates(template);
+            }}
+          >
+            <img
+              style={{ width: 200 }}
+              key={template.id}
+              src={template.blank}
+              alt={template.name}
+            />
+          </button>
         );
       })}
     </div>
