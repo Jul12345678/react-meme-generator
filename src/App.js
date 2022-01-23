@@ -5,6 +5,8 @@ function App() {
   // create state to hold templates
   const [templates, setTemplates] = useState([]);
   const [template, setTemplate] = useState(null);
+  const [topText, setTopText] = useState('');
+  const [bottomText, setBottomText] = useState('');
 
   useEffect(() => {
     fetch('https://api.memegen.link/templates').then((x) =>
@@ -15,10 +17,22 @@ function App() {
   return (
     <div style={{ textAlign: 'center' }}>
       {template && (
-        <form>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
           <Memes template={template} />
-          <input placeholder="top text" />
-          <input placeholder="bottom text" />
+          <input
+            placeholder="top text"
+            value={topText}
+            onChange={(e) => setTopText(e.target.value)}
+          />
+          <input
+            placeholder="bottom text"
+            value={bottomText}
+            onChange={(e) => setBottomText(e.target.value)}
+          />
           <button type="submit">Create Meme</button>
         </form>
       )}
