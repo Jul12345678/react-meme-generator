@@ -15,18 +15,25 @@ function App() {
   return (
     <div style={{ textAlign: 'center' }}>
       {template && <Memes template={template} />}
-      {templates.map((template) => {
-        return (
-          <button key="id">
-            <Memes
-              template={template}
-              onClick={() => {
-                setTemplate(template);
-              }}
-            />
-          </button>
-        );
-      })}
+      {!template && (
+        // Fragment to add child
+        <>
+          <h1>Click to edit!</h1>
+          {templates.map((template) => {
+            return (
+              // Button for ESLint
+              <button key="id">
+                <Memes
+                  template={template}
+                  onClick={() => {
+                    setTemplate(template);
+                  }}
+                />
+              </button>
+            );
+          })}
+        </>
+      )}
     </div>
   );
 }
