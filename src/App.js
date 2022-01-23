@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Memes } from './components/Memes';
 
+const objectToQueryParam = (obj) => {
+  const params = Object.entries(obj).map(([key, value]) => `${key}=${value}`);
+  return '?' + params.join('&');
+};
 function App() {
   // create state to hold templates
   const [templates, setTemplates] = useState([]);
@@ -18,8 +22,20 @@ function App() {
     <div style={{ textAlign: 'center' }}>
       {template && (
         <form
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
+
+            const params = {
+              template_id: template.id,
+              text: [topText, bottomText],
+            };
+            const response = await fetch(
+              `https://api.memegen.link/templates/${objectToQueryParam(
+                params,
+              )}`,
+            );
+            const data = await response.json();
+            console.log(data);
           }}
         >
           <Memes template={template} />
