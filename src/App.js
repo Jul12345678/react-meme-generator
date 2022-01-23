@@ -14,7 +14,14 @@ function App() {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      {template && <Memes template={template} />}
+      {template && (
+        <form>
+          <Memes template={template} />
+          <input placeholder="top text" />
+          <input placeholder="bottom text" />
+          <button type="submit">Create Meme</button>
+        </form>
+      )}
       {!template && (
         // Fragment to add child
         <>
